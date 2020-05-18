@@ -1,203 +1,52 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <link rel="stylesheet" href="css/leaflet.css">
-        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
-        <style>
-        #map {
-            width: 1043px;
-            height: 579px;
-        }
-        </style>
-        <title></title>
-    </head>
-    <body>
-        <div id="map">
-        </div>
-        <script src="js/qgis2web_expressions.js"></script>
-        <script src="js/leaflet.js"></script>
-        <script src="js/leaflet.rotatedMarker.js"></script>
-        <script src="js/leaflet.pattern.js"></script>
-        <script src="js/leaflet-hash.js"></script>
-        <script src="js/Autolinker.min.js"></script>
-        <script src="js/rbush.min.js"></script>
-        <script src="js/labelgun.min.js"></script>
-        <script src="js/labels.js"></script>
-        <script src="data/cat_muni_poly_0.js"></script>
-        <script src="data/SectorsS_2018_1.js"></script>
-        <script src="data/RegionsS_2018_2.js"></script>
-        <script>
-        var map = L.map('map', {
-            zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[41.027191503703925,1.4294801644013764],[41.72077243114658,3.074084913847904]]);
-        var hash = new L.Hash(map);
-        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
-        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
-        var bounds_group = new L.featureGroup([]);
-        function setBounds() {
-        }
-        function pop_cat_muni_poly_0(feature, layer) {
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['MUNICIPI'] !== null ? autolinker.link(feature.properties['MUNICIPI'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['COMARCA'] !== null ? autolinker.link(feature.properties['COMARCA'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['PROVINCIA'] !== null ? autolinker.link(feature.properties['PROVINCIA'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['NOM_MUNI'] !== null ? autolinker.link(feature.properties['NOM_MUNI'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['NOMN_MUNI'] !== null ? autolinker.link(feature.properties['NOMN_MUNI'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['NOMG_MUNI'] !== null ? autolinker.link(feature.properties['NOMG_MUNI'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['CAP_MUNI'] !== null ? autolinker.link(feature.properties['CAP_MUNI'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['CAPN_MUNI'] !== null ? autolinker.link(feature.properties['CAPN_MUNI'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['CAPG_MUNI'] !== null ? autolinker.link(feature.properties['CAPG_MUNI'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['SUP_MUNI'] !== null ? autolinker.link(feature.properties['SUP_MUNI'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['ORSUP_MUNI'] !== null ? autolinker.link(feature.properties['ORSUP_MUNI'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['AREA'] !== null ? autolinker.link(feature.properties['AREA'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['PERIMETER'] !== null ? autolinker.link(feature.properties['PERIMETER'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
 
-        function style_cat_muni_poly_0_0() {
-            return {
-                pane: 'pane_cat_muni_poly_0',
-                opacity: 1,
-                color: 'rgba(120,120,120,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fillOpacity: 0,
-                interactive: true,
-            }
-        }
-        map.createPane('pane_cat_muni_poly_0');
-        map.getPane('pane_cat_muni_poly_0').style.zIndex = 400;
-        map.getPane('pane_cat_muni_poly_0').style['mix-blend-mode'] = 'normal';
-        var layer_cat_muni_poly_0 = new L.geoJson(json_cat_muni_poly_0, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_cat_muni_poly_0',
-            layerName: 'layer_cat_muni_poly_0',
-            pane: 'pane_cat_muni_poly_0',
-            onEachFeature: pop_cat_muni_poly_0,
-            style: style_cat_muni_poly_0_0,
-        });
-        bounds_group.addLayer(layer_cat_muni_poly_0);
-        map.addLayer(layer_cat_muni_poly_0);
-        function pop_SectorsS_2018_1(feature, layer) {
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['CODISS'] !== null ? autolinker.link(feature.properties['CODISS'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['NOMSS'] !== null ? autolinker.link(feature.properties['NOMSS'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['ÀREA'] !== null ? autolinker.link(feature.properties['ÀREA'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Quick Start - Leaflet</title>
 
-        function style_SectorsS_2018_1_0() {
-            return {
-                pane: 'pane_SectorsS_2018_1',
-                opacity: 1,
-                color: 'rgba(51,160,44,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 2.0, 
-                fillOpacity: 0,
-                interactive: true,
-            }
-        }
-        map.createPane('pane_SectorsS_2018_1');
-        map.getPane('pane_SectorsS_2018_1').style.zIndex = 401;
-        map.getPane('pane_SectorsS_2018_1').style['mix-blend-mode'] = 'normal';
-        var layer_SectorsS_2018_1 = new L.geoJson(json_SectorsS_2018_1, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_SectorsS_2018_1',
-            layerName: 'layer_SectorsS_2018_1',
-            pane: 'pane_SectorsS_2018_1',
-            onEachFeature: pop_SectorsS_2018_1,
-            style: style_SectorsS_2018_1_0,
-        });
-        bounds_group.addLayer(layer_SectorsS_2018_1);
-        map.addLayer(layer_SectorsS_2018_1);
-        function pop_RegionsS_2018_2(feature, layer) {
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['CODIRS'] !== null ? autolinker.link(feature.properties['CODIRS'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['NOMRS'] !== null ? autolinker.link(feature.properties['NOMRS'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['ÀREA'] !== null ? autolinker.link(feature.properties['ÀREA'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
 
-        function style_RegionsS_2018_2_0() {
-            return {
-                pane: 'pane_RegionsS_2018_2',
-                opacity: 1,
-                color: 'rgba(227,26,28,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 2.0, 
-                fillOpacity: 0,
-                interactive: true,
-            }
-        }
-        map.createPane('pane_RegionsS_2018_2');
-        map.getPane('pane_RegionsS_2018_2').style.zIndex = 402;
-        map.getPane('pane_RegionsS_2018_2').style['mix-blend-mode'] = 'normal';
-        var layer_RegionsS_2018_2 = new L.geoJson(json_RegionsS_2018_2, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_RegionsS_2018_2',
-            layerName: 'layer_RegionsS_2018_2',
-            pane: 'pane_RegionsS_2018_2',
-            onEachFeature: pop_RegionsS_2018_2,
-            style: style_RegionsS_2018_2_0,
-        });
-        bounds_group.addLayer(layer_RegionsS_2018_2);
-        map.addLayer(layer_RegionsS_2018_2);
-        setBounds();
-        </script>
-    </body>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+
+
+	
+</head>
+<body>
+
+
+
+<div id="mapid" style="width: 600px; height: 400px;"></div>
+<script>
+
+	var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+
+	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+		maxZoom: 18,
+		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+			'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+		id: 'mapbox/streets-v11',
+		tileSize: 512,
+		zoomOffset: -1
+	}).addTo(mymap);
+
+	function onMapClick(e) {
+		popup
+			.setLatLng(e.latlng)
+			.setContent("You clicked the map at " + e.latlng.toString())
+			.openOn(mymap);
+	}
+
+	mymap.on('click', onMapClick);
+
+</script>
+
+
+
+</body>
 </html>
